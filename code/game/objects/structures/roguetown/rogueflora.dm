@@ -82,8 +82,8 @@
 */
 
 /obj/structure/flora/roguetree/burnt
-	name = "burnt tree"
-	desc = "Maybe lightning, maybe war took the life of this once lively tree."
+	name = "young tree"
+	desc = "A young, growing tree. Past its time as a sapling, but not yet worth climbing."
 	icon = 'icons/roguetown/misc/96x96.dmi'
 	icon_state = "t1"
 	stump_type = /obj/structure/flora/roguetree/stump/burnt
@@ -95,7 +95,7 @@
 
 /obj/structure/flora/roguetree/stump/burnt
 	name = "tree stump"
-	desc = "This stump is burnt. Maybe someone was trying to get coal the easy way."
+	desc = "Youth cut away before it could reach its prime."
 	icon_state = "st1"
 	icon = 'icons/roguetown/misc/96x96.dmi'
 	stump_type = null
@@ -294,6 +294,8 @@
 					user.visible_message(span_notice("[user] finds [B] in [src]."))
 					return
 			user.visible_message(span_warning("[user] searches through [src]."))
+			if((looty.len) && do_after(user, CLICK_CD_MELEE))
+				attack_hand(user)
 #ifdef MATURESERVER
 			if(!looty.len)
 				to_chat(user, span_warning("Picked clean."))
@@ -370,7 +372,7 @@
 /obj/structure/flora/roguegrass/bush/wall/winter
 	icon_state = "bushwall1winter"
 
-/obj/structure/flora/roguegrass/bush/wall/red/Initialize()
+/obj/structure/flora/roguegrass/bush/wall/winter/Initialize()
 	. = ..()
 	icon_state = "bushwall[pick(1,2)]winter"
 
@@ -535,7 +537,7 @@
 
 /obj/structure/flora/roguegrass/pyroclasticflowers/update_icon()
 	icon_state = "pyroflower[rand(1,3)]"
-	
+
 /obj/structure/flora/roguegrass/pyroclasticflowers/Initialize()
 	. = ..()
 	if(prob(88))
